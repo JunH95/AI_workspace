@@ -22,7 +22,8 @@ ai_workspace/
 └── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간
     ├── agent_generator.md  # AI 에이전트 페르소나 생성 워크플로우
     ├── skill_generator.md  # AI 스킬 워크플로우 생성 워크플로우
-    └── github_workflow.md  # GitHub 연동 및 안전한 버전 관리 파이프라인
+    ├── github_team_workflow.md # 팀 협업용 GitHub 연동 및 버전 관리 파이프라인
+    └── github_solo_workflow.md # 1인 개발용 경량화 GitHub 파이프라인
 
 ---
 
