@@ -17,8 +17,12 @@ ai_workspace/
 ├── README.md               # 저장소 개요 및 활용 가이드라인
 ├── GEMINI.md               # 저장소 관리 및 확장 시 AI가 준수해야 할 개발 규칙
 ├── Rules/                  # 전역 런타임 환경에 상시 매핑되는 기본 규칙 공간
+│   └── global_rules.md     # AI 코드 생성 및 런타임 제어 전역 규칙
 ├── Agents/                 # 특정 역할 수행을 위한 독립적 페르소나 컨텍스트 공간
 └── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간
+    ├── agent_generator.md  # AI 에이전트 페르소나 생성 워크플로우
+    ├── skill_generator.md  # AI 스킬 워크플로우 생성 워크플로우
+    └── github_workflow.md  # GitHub 연동 및 안전한 버전 관리 파이프라인
 
 ---
 
