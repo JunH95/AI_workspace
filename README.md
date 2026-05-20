@@ -1,45 +1,47 @@
 # AI Workspace
 
 > Model-Agnostic AI Prompt Engineering & Agent Environment Configuration
-> 특정 LLM 인프라에 종속되지 않는 범용적 AI 협업 환경 구축과 프롬프트 엔지니어링 자산화를 위한 환경설정(Configuration as Code) 저장소입니다.
+> 특정 LLM 인프라에 종속되지 않는 범용적 AI 협업 환경 구축과 더불어, **AI 기능 탐구 및 개인화된 프롬프트 엔지니어링 스터디 노트를 기록하고 자산화하는 종합 지식 허브(Knowledge Hub)**입니다.
 
 ---
 
-## 저장소 구축 목적 (Core Value)
+## 저장소 핵심 가치 (Core Value)
 
-1. **인프라 독립성 확보 (Model-Agnostic Architecture):** Gemini, Claude, GPT 등 다양한 LLM 엔진 전환 시에도 동일한 동작과 출력을 보장하는 독립적 프롬프트 프레임워크를 지향합니다. 모든 지침은 이식성이 높은 순수 마크다운(.md) 포맷으로 관리됩니다.
-2. **런타임 및 토큰 최적화 (Context & Token Efficiency):** 전체 규칙을 단일 세션에 무분별하게 상주시키는 비효율을 제거하고, 작업 도메인에 따라 필요한 에이전트(Persona)와 워크플로우(Skill)를 동적으로 조립(Decoupling)하여 토큰 소모를 최적화합니다.
-3. **동기화 유연성 (Runtime Mapping):** Gemini CLI 및 Antigravity 등 단일 환경설정 파일(~/.gemini/GEMINI.md)을 참조하는 로컬 런타임 특성을 반영하여, 전역 규칙의 관리 효율성과 타 LLM 도구로의 확장성을 동시에 확보합니다.
+1. **지식의 자산화 (Knowledge Management):** AI와 대화하며 깨달은 슬래시 커맨드 활용법, 아키텍처 설계법, 프롬프트 한계점 등을 단순한 대화 휘발성으로 두지 않고 `Docs/`에 문서화하여 영구적인 스터디 자산으로 만듭니다.
+2. **지속적 진화 (Continuous Evolution):** 학습한 내용을 바탕으로 기존의 에이전트(Persona)와 스킬(Workflow)을 지속적으로 버전업(Refactoring)하여 나만의 최적화된 도구로 발전시킵니다.
+3. **인프라 독립성 확보 (Model-Agnostic Architecture):** 다양한 LLM 엔진 전환 시에도 동일한 동작을 보장하는 독립적 프롬프트 프레임워크를 지향합니다.
+4. **런타임 및 토큰 최적화 (Context & Token Efficiency):** 전체 규칙을 상주시키지 않고, 작업 도메인에 따라 필요한 에이전트와 워크플로우를 동적으로 조립(Decoupling)하여 토큰 소모를 최적화합니다.
 
 ## 디렉토리 구조 (Directory Structure)
 
 ai_workspace/
 ├── README.md               # 저장소 개요 및 활용 가이드라인
-├── GEMINI.md               # 저장소 관리 및 확장 시 AI가 준수해야 할 개발 규칙
-├── Rules/                  # 전역 런타임 환경에 상시 매핑되는 기본 규칙 공간
+├── GEMINI.md               # 저장소 관리, 확장, 문서화 시 AI가 준수해야 할 메타 컨트롤러 (영문)
+├── Docs/                   # [NEW] AI 기능 명세, 스터디 노트, 아키텍처 이론 등 학습 자료 보관 공간 (국문)
+├── Rules/                  # 전역 런타임 환경에 상시 매핑되는 기본 규칙 공간 (영문)
 │   └── global_rules.md     # AI 코드 생성 및 런타임 제어 전역 규칙
-├── Agents/                 # 특정 역할 수행을 위한 독립적 페르소나 컨텍스트 공간
-└── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간
-    ├── agent_generator.md  # AI 에이전트 페르소나 생성 워크플로우
-    ├── skill_generator.md  # AI 스킬 워크플로우 생성 워크플로우
-    ├── github_team_workflow.md # 팀 협업용 GitHub 연동 및 버전 관리 파이프라인
-    └── github_solo_workflow.md # 1인 개발용 경량화 GitHub 파이프라인
+├── Agents/                 # 특정 역할 수행을 위한 독립적 페르소나 컨텍스트 공간 (영문)
+│   ├── product_manager.md  # 비즈니스 로직 및 PRD 기획 페르소나
+│   ├── tech_lead.md        # 데이터베이스 및 아키텍처 설계 페르소나
+│   └── hybrid_tech_pm.md   # 1인 개발 환경에 최적화된 올인원 기획 페르소나
+└── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간 (영문)
 
 ---
 
-## 활용 가이드 (How to Use)
+## 활용 가이드 (How to Use & Lifecycle)
 
-본 저장소의 자산은 모든 세션에 한꺼번에 로드하지 않고, 현재 작업의 목적에 따라 **동적으로 조합하여 사용**함으로써 토큰 효율을 극대화합니다.
+본 저장소는 '학습 -> 자산화 -> 적용'의 생애주기(Lifecycle)를 따릅니다.
 
-### 1. 전역 설정 (Global Initialization)
-새로운 AI 세션을 시작할 때, `Rules/global_rules.md`의 내용을 컨텍스트에 입력하여 기본적인 답변 스타일과 코딩 표준을 확립합니다.
+### 1. 학습 및 문서화 (Study & Documentation)
+새로운 AI 기능(예: `/grill-me` 명령어)이나 효율적인 프롬프트 작성법을 깨달았을 때, AI에게 해당 내용을 `Docs/` 디렉토리에 마크다운 문서로 정리하도록 지시합니다. (예: `Docs/antigravity_slash_commands.md`)
 
-### 2. 에이전트 및 스킬 로드 (Loading Components)
-수행하려는 태스크에 따라 필요한 파일을 선별적으로 호출합니다.
-- **예시 (데이터 분석 작업):**
-  1. `Rules/global_rules.md` (기본 규칙)
-  2. `Agents/data_analyst.md` (데이터 분석 페르소나)
-  3. `Skills/data_cleaning_pipeline.md` (데이터 정제 워크플로우)
+### 2. 에이전트 및 스킬 고도화 (Evolution)
+`Docs/`에 누적된 지식을 바탕으로, 더 똑똑한 에이전트나 워크플로우가 필요할 경우 인터넷의 오픈소스 프롬프트를 참고하여 `Agents/`나 `Skills/` 디렉토리에 영문으로 된 실행 명세서를 생성합니다.
 
-### 3. 확장 및 기여 (Expansion)
-새로운 에이전트나 스킬을 추가하고 싶다면, `GEMINI.md`의 생성 규격을 준수하여 새로운 마크다운 파일을 생성하도록 AI에게 요청하세요. 모든 변경 사항은 사전에 사용자 브리핑을 거쳐 수행됩니다.
+### 3. 실전 프로젝트 적용 방법 (Use Case: 자율주행 탱크 프로젝트)
+본 저장소(`ai_workspace`)는 프롬프트 마스터 저장소 역할을 하며, 실제 개별 프로젝트 진행 시 아래와 같이 조합하여 활용합니다.
+
+*   **Rules (전역 규칙):** C++/Python 코딩 표준, ROS2 통신 규약
+*   **Agents (페르소나):** `@Agents/ros2_expert.md`, `@Agents/computer_vision_engineer.md`
+*   **Skills (워크플로우):** `@Skills/sensor_calibration.md`
+*   **프로젝트 이식 방법:** `TankProject` 폴더 내에 `.gemini/` 또는 `docs/` 디렉토리를 만들고, 본 `ai_workspace`에서 위 작업에 필요한 `.md` 파일들만 복사해 넣습니다. 이후 코딩할 때 필요한 파일만 `@` 기호로 호출하여 AI를 그 순간에만 해당 분야 최고 전문가로 빙의시킵니다.

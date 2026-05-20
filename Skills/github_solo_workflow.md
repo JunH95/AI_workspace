@@ -1,30 +1,30 @@
 # GitHub Solo Workflow Manager
 
-> 1인 개발 환경에서 브랜치 분기 및 PR 절차를 생략하고, 빠른 반영과 안전한 메인 브랜치 버전 관리를 보장하기 위한 경량화 파이프라인입니다.
+> A lightweight pipeline for single-developer environments that skips branching and PR procedures to ensure rapid deployment and secure main branch version control.
 
 ---
 
-## 1. 정의 및 역할 (Definition & Role)
-- **개발 생산성 극대화:** 복잡한 협업용 분기(Branching) 및 풀 리퀘스트(PR) 프로세스를 생략하여 신속하게 개발 사항을 배포 및 저장소에 갱신합니다.
-- **최소 자동화 검증:** 1인 환경에 최적화된 상태 검증 및 로컬-원격 동기화 파이프라인을 통제하여 커밋 히스토리가 꼬이는 현상을 예방합니다.
-- **원격 저장소 무결성 확보:** 메인 브랜치에 직접 푸시(Push)하더라도 발생할 수 있는 원격 히스토리 파괴나 민감 정보 노출을 시스템적으로 원천 차단합니다.
+## 1. Definition & Role
+- **Maximize Development Productivity:** Bypasses complex collaborative branching and Pull Request (PR) processes to quickly deploy and update the repository.
+- **Minimal Automated Verification:** Controls state verification and local-remote synchronization pipelines optimized for a single-developer environment to prevent commit history entanglement.
+- **Secure Remote Repository Integrity:** Systematically blocks remote history corruption or sensitive information exposure that can occur even when pushing directly to the main branch.
 
-## 2. 핵심 실행 프로세스 (Execution Pipeline)
+## 2. Execution Pipeline
 
-### Phase 1: 상태 검증 및 동기화 (Safe Pull & Sync)
-1. **로컬 상태 조회:** `git status`를 수행하여 미지정 변경 사항이 있는지 진단합니다.
-2. **최신 원격지 반영:** 로컬 작업 시작 전, 혹은 원격 푸시 직전에 `git pull origin main`을 수행하여 원격 저장소의 최신 코드베이스를 안전하게 로컬에 머지(Merge)시킵니다.
-3. **충돌 처리:** 원격지 코드와 충돌이 발생할 경우, 수동으로 충돌을 해결한 뒤에만 다음 Phase로 진입합니다.
+### Phase 1: Safe Pull & Sync
+1. **Check Local State:** Execute `git status` to diagnose any unstaged changes.
+2. **Apply Latest Remote Changes:** Before starting local work, or immediately before a remote push, execute `git pull origin main` to safely merge the latest codebase from the remote repository to the local environment.
+3. **Resolve Conflicts:** If conflicts occur with the remote code, manually resolve them before proceeding to the next phase.
 
-### Phase 2: 원자적 단위 커밋 (Atomic Commit to Main)
-1. **변경 분석 및 스테이징:** `git add .` 일괄 추가 대신 변경 사항 중 기능 단위로 연관된 파일들을 선별하여 스테이징합니다. (`git add [file_path]`)
-2. **커밋 메시지 표준 엄수:** Conventional Commits 규격을 사용하여 변경의 의도를 명확하게 작성합니다. (예: `feat: add database schema`)
+### Phase 2: Atomic Commit to Main
+1. **Analyze and Stage Changes:** Instead of bulk adding with `git add .`, select and stage files associated with a specific feature unit (`git add [file_path]`).
+2. **Adhere to Commit Message Standards:** Use Conventional Commits specifications to clearly state the intent of the change (e.g., `feat: add database schema`).
 
-### Phase 3: 메인 브랜치 직접 반영 (Direct Push)
-1. **최종 정적 분석:** 코드 내 하드코딩된 패스워드, 개인 키, 불필요한 테스트 코드 등이 없는지 재점검합니다.
-2. **즉각적 반영:** 검증 완료 시, 원격 `main` 브랜치에 직접 푸시하여 버전을 갱신합니다. (`git push origin main`)
+### Phase 3: Direct Push
+1. **Final Static Analysis:** Re-verify that there are no hardcoded passwords, private keys, or unnecessary test codes within the code.
+2. **Immediate Deployment:** Upon successful verification, directly push to the remote `main` branch to update the version (`git push origin main`).
 
-## 3. 기술적 제약 사항 (Constraints)
-1. **원격 히스토리 덮어쓰기 영구 금지:** 1인 개발 환경이라 하더라도 이력 보존 및 복구 안전성을 위해 어떠한 경우에도 `git push --force` 계열의 강제 명령어를 사용할 수 없습니다.
-2. **민감 정보 하드코딩 유출 차단:** 커밋 및 푸시 대상 파일 내에 API Key, 로컬 절대 경로 등 외부 유출 시 취약점이 될 수 있는 정보가 유입되었는지 정적 텍스트 검색을 무조건 수행합니다.
-3. **선동기화 필수 원칙:** 원격지로 푸시하기 전에 `git pull`을 실행하지 않고 푸시를 시도하여 발생하는 원격 거부 에러(non-fast-forward)를 전면 예방하기 위해, 항상 Phase 1이 선행된 상태에서만 푸시 명령어를 조립합니다.
+## 3. Constraints
+1. **Permanent Ban on Overwriting Remote History:** Even in a solo development environment, to preserve history and ensure recovery safety, `git push --force` related commands MUST NOT be used under any circumstances.
+2. **Prevent Hardcoded Sensitive Information Leaks:** A static text search MUST be unconditionally performed to ensure no information that could become a vulnerability upon external exposure (such as API Keys or local absolute paths) has leaked into the target files for commit and push.
+3. **Pre-synchronization Prerequisite:** To completely prevent remote rejection errors (non-fast-forward) caused by attempting a push without executing `git pull` first, the push command MUST only be assembled when Phase 1 has been completed.
