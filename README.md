@@ -17,14 +17,23 @@
 ai_workspace/
 ├── README.md               # 저장소 개요 및 활용 가이드라인
 ├── GEMINI.md               # 저장소 관리, 확장, 문서화 시 AI가 준수해야 할 메타 컨트롤러 (영문)
-├── Docs/                   # [NEW] AI 기능 명세, 스터디 노트, 아키텍처 이론 등 학습 자료 보관 공간 (국문)
+├── handoff_state.md        # [NEW] 채팅방 이주 시 컨텍스트 연속성을 유지하는 상태 스냅샷 파일
+├── Docs/                   # AI 기능 명세, 스터디 노트, 아키텍처 이론 등 학습 자료 보관 공간 (국문)
 ├── Rules/                  # 전역 런타임 환경에 상시 매핑되는 기본 규칙 공간 (영문)
-│   └── rule_global.md      # AI 코드 생성 및 런타임 제어 전역 규칙
+│   ├── rule_global.md      # AI 코드 생성 및 런타임 제어 전역 규칙
+│   └── rule_clean_code.md  # [NEW] AI의 스파게티 코드를 차단하는 코드 품질 및 포맷 규칙
 ├── Agents/                 # 특정 역할 수행을 위한 독립적 페르소나 컨텍스트 공간 (영문)
 │   ├── agent_product_manager.md # 비즈니스 로직 및 PRD 기획 페르소나
 │   ├── agent_tech_lead.md       # 데이터베이스 및 아키텍처 설계 페르소나
-│   └── agent_hybrid_tech_pm.md  # 1인 개발 환경에 최적화된 올인원 기획 페르소나
+│   ├── agent_hybrid_tech_pm.md  # 1인 개발 환경에 최적화된 올인원 기획 페르소나
+│   └── agent_qa_engineer.md     # [NEW] 예외 상황 검증, 테스트 코드 작성 전담 페르소나
 └── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간 (영문)
+    ├── skill_agent_generator.md # 커스텀 에이전트 자동 생성 스킬
+    ├── skill_generator.md       # 신규 스킬 자동 생성 스킬
+    ├── skill_github_solo.md     # 1인 개발용 신속 안전 배포 스킬
+    ├── skill_github_team.md     # 팀 협업용 PR 리뷰 및 머지 스킬
+    ├── skill_context_handoff.md # 채팅방 상태 압축 및 이전 스킬
+    └── skill_deep_debug.md      # [NEW] 에러 폭주 방지 심층 디버깅 스킬
 
 ---
 
@@ -44,4 +53,6 @@ ai_workspace/
 *   **Rules (전역 규칙):** C++/Python 코딩 표준, ROS2 통신 규약 (예: `rule_cpp_standard.md`)
 *   **Agents (페르소나):** `@Agents/agent_ros2_expert.md`, `@Agents/agent_cv_engineer.md`
 *   **Skills (워크플로우):** `@Skills/skill_sensor_calibration.md`
-*   **프로젝트 이식 방법:** `TankProject` 폴더 내에 `.gemini/` 또는 `docs/` 디렉토리를 만들고, 본 `ai_workspace`에서 위 작업에 필요한 `.md` 파일들만 복사해 넣습니다. 이후 코딩할 때 필요한 파일만 `@` 기호로 호출하여 AI를 그 순간에만 해당 분야 최고 전문가로 빙의시킵니다.
+*   **프로젝트 이식 방법 (Full Clone):** 마크다운 텍스트 파일은 아무리 많아도 AI의 토큰(Token)이나 성능에 부하를 주지 않으므로 필요한 것만 골라낼 필요가 없습니다. 새 프로젝트를 시작할 때는 이 `ai_workspace` 템플릿을 **통째로 클론(Clone)**하여 기본 뼈대로 사용하십시오.
+*   **온디맨드 소환:** 평소에는 조용히 두다가 코딩할 때 필요한 파일만 `@` 기호로 호출하여 AI를 그 순간에만 해당 분야 최고 전문가로 빙의시킵니다.
+*   **로컬 자산 분리 전략:** 특정 프로젝트(예: 블록체인)에서만 쓰이는 워커 에이전트는 해당 프로젝트 내부에만 추가하고, "어느 프로젝트에서나 쓸 만큼 엄청나게 유용한 스킬"을 개발했을 때만 이 베이스 템플릿으로 역병합(Backport)하여 도구상자를 성장시키세요.
