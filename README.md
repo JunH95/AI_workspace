@@ -19,11 +19,11 @@ ai_workspace/
 ├── GEMINI.md               # 저장소 관리, 확장, 문서화 시 AI가 준수해야 할 메타 컨트롤러 (영문)
 ├── Docs/                   # [NEW] AI 기능 명세, 스터디 노트, 아키텍처 이론 등 학습 자료 보관 공간 (국문)
 ├── Rules/                  # 전역 런타임 환경에 상시 매핑되는 기본 규칙 공간 (영문)
-│   └── global_rules.md     # AI 코드 생성 및 런타임 제어 전역 규칙
+│   └── rule_global.md      # AI 코드 생성 및 런타임 제어 전역 규칙
 ├── Agents/                 # 특정 역할 수행을 위한 독립적 페르소나 컨텍스트 공간 (영문)
-│   ├── product_manager.md  # 비즈니스 로직 및 PRD 기획 페르소나
-│   ├── tech_lead.md        # 데이터베이스 및 아키텍처 설계 페르소나
-│   └── hybrid_tech_pm.md   # 1인 개발 환경에 최적화된 올인원 기획 페르소나
+│   ├── agent_product_manager.md # 비즈니스 로직 및 PRD 기획 페르소나
+│   ├── agent_tech_lead.md       # 데이터베이스 및 아키텍처 설계 페르소나
+│   └── agent_hybrid_tech_pm.md  # 1인 개발 환경에 최적화된 올인원 기획 페르소나
 └── Skills/                 # 특정 태스크 중심의 절차적 워크플로우 공간 (영문)
 
 ---
@@ -41,7 +41,7 @@ ai_workspace/
 ### 3. 실전 프로젝트 적용 방법 (Use Case: 자율주행 탱크 프로젝트)
 본 저장소(`ai_workspace`)는 프롬프트 마스터 저장소 역할을 하며, 실제 개별 프로젝트 진행 시 아래와 같이 조합하여 활용합니다.
 
-*   **Rules (전역 규칙):** C++/Python 코딩 표준, ROS2 통신 규약
-*   **Agents (페르소나):** `@Agents/ros2_expert.md`, `@Agents/computer_vision_engineer.md`
-*   **Skills (워크플로우):** `@Skills/sensor_calibration.md`
+*   **Rules (전역 규칙):** C++/Python 코딩 표준, ROS2 통신 규약 (예: `rule_cpp_standard.md`)
+*   **Agents (페르소나):** `@Agents/agent_ros2_expert.md`, `@Agents/agent_cv_engineer.md`
+*   **Skills (워크플로우):** `@Skills/skill_sensor_calibration.md`
 *   **프로젝트 이식 방법:** `TankProject` 폴더 내에 `.gemini/` 또는 `docs/` 디렉토리를 만들고, 본 `ai_workspace`에서 위 작업에 필요한 `.md` 파일들만 복사해 넣습니다. 이후 코딩할 때 필요한 파일만 `@` 기호로 호출하여 AI를 그 순간에만 해당 분야 최고 전문가로 빙의시킵니다.

@@ -34,6 +34,7 @@ When the user requests to create or update specifications, Gemini MUST satisfy t
 3. **Model-Agnostic Design:** Maintain standard Markdown specifications, excluding platform-specific syntax, so the context is instantly interpretable if migrated to other LLMs (Claude, GPT, etc.).
 4. **Professional Tone:** Maintain an objective, concise, and professional engineering tone.
 5. **No Sensitive Information:** Ensure API Keys, tokens, passwords, or PII (e.g., local directory usernames) are never hardcoded.
+6. **Naming Convention (Prefix Requirement):** To ensure high discoverability via IDE auto-complete (IntelliSense), all System Assets MUST use specific prefixes: `agent_[name].md` for Agents, `skill_[name].md` for Skills, and `rule_[name].md` for Rules.
 
 ## 4. Repository Management & Pipeline
 
