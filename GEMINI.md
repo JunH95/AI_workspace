@@ -1,72 +1,69 @@
 # Repository Governance Rule: Gemini Instructions
 
-본 명세서는 `ai_workspace` 저장소의 유지보수, 하위 디렉토리 확장, 그리고 신규 컨텍스트(Agents, Skills 명세서)를 생성 및 수정할 때 제미나이가 준수해야 할 최우선 형상 관리 지침입니다.
+> [Meta-Controller: The highest-priority configuration management guidelines Gemini MUST adhere to when maintaining the `ai_workspace` repository, expanding subdirectories, and creating/modifying contexts (Agents, Skills, Docs).]
 
 ---
 
-## 1. 전역 규칙과의 역할 분리 (Scope & Boundaries)
+## 1. Scope & Boundaries (Separation of Roles)
 
-1. **상시 행동 지침 위임:** 일상적인 코딩 스타일, 말투 제약, 디버깅 프로세스는 `Rules/global_rules.md`에 위임합니다.
-2. **저장소 메타 제어:** 본 파일(`GEMINI.md`)은 새로운 에이전트(Agents) 페르소나나 워크플로우(Skills) 마크다운 파일을 생성할 때, 해당 산출물의 규격과 품질을 통제하는 메타 컨트롤러 역할을 수행합니다.
+1. **Delegation of Daily Behavior:** Routine coding styles, tone constraints, and debugging processes are delegated to `Rules/global_rules.md`.
+2. **Repository Meta-Control:** This file (`GEMINI.md`) acts as the meta-controller ensuring standard specification, quality, and structural integrity when generating or refactoring Markdown assets in this repository.
 
----
+## 2. Artifact Generation & Expansion Standards
 
-## 2. 하위 자산 생성 및 확장 규격 (Artifact Generation Standards)
+When the user requests to create or update specifications, Gemini MUST satisfy the following quality criteria based on the target directory:
 
-제미나이는 사용자의 요청으로 `Agents/` 또는 `Skills/` 디렉토리에 새로운 명세서를 생성할 때, 아래의 품질 기준을 반드시 충족해야 합니다.
+### Agents/ (Persona Specifications)
+* **Purpose:** Define specific roles specialized in technology stacks (e.g., Pandas, PyTorch) or domains.
+* **Requirements:** Clearly specify the persona, scope of work, and runtime guidelines to prevent blind code generation and encourage autonomous reasoning.
 
-### Agents/ (페르소나 명세 생성 지침)
-* **목적:** 특정 기술 스택(Pandas, PyTorch 등) 또는 도메인에 특화된 역할 정의.
-* **필수 포함 요소:** 해당 에이전트의 구체적인 페르소나, 담당 업무 범위, 그리고 맹목적인 코드 생성을 방지하고 학습을 유도하는 런타임 가이드라인을 명시해야 합니다.
+### Skills/ (Procedural Workflows)
+* **Purpose:** Define task-centric architecture (e.g., data cleaning, model validation).
+* **Requirements:** Structurally describe the pipeline connecting Input, Process (Step-by-step), and Output formats.
 
-### Skills/ (절차적 워크플로우 생성 지침)
-* **목적:** 특정 태스크(데이터 정제, 모델 검증 등) 중심의 아키텍 architecture 정의.
-* **필수 포함 요소:** 입력(Input) 정의, 단계별 처리 프로세스(Process), 최종 출력(Output) 포맷이 유기적으로 연결된 파이프라인 구조로 기술해야 합니다.
+### Docs/ (Knowledge & Study Hub)
+* **Purpose:** Archive AI feature manuals, prompt engineering study notes, and architectural theory learned during conversations.
+* **Requirements:** Document concepts clearly with examples. **CRITICAL:** All documentation MUST include explicit URLs or references to official documentation or verified sources to guarantee reliability and prevent hallucination.
 
----
+## 3. Strict Constraints & Language Policy
 
-## 3. 공통 출력 제약 사항 (Strict Constraints)
+1. **Strict Language Routing (CRITICAL):**
+   - **System Assets (`Agents/`, `Skills/`, `Rules/`, `GEMINI.md`):** MUST be written entirely in **English** to maximize token efficiency and instruction-following performance of the LLM.
+   - **Human-Facing Assets (`README.md`, `Docs/`):** MUST be written in **Korean** for the user's readability and study purposes.
+2. **No Visual Elements (No Emojis/Emoticons):** Strictly prohibit the use of emojis and emoticons in all Markdown texts and comments to maintain professional engineering documentation standards.
+3. **Model-Agnostic Design:** Maintain standard Markdown specifications, excluding platform-specific syntax, so the context is instantly interpretable if migrated to other LLMs (Claude, GPT, etc.).
+4. **Professional Tone:** Maintain an objective, concise, and professional engineering tone.
+5. **No Sensitive Information:** Ensure API Keys, tokens, passwords, or PII (e.g., local directory usernames) are never hardcoded.
 
-1. **시각적 요소 전면 금지 (No Emojis/Emoticons):** 기술 문서의 전문성 유지와 가독성 확보를 위해, 산출되는 모든 마크다운 텍스트 및 주석에서 이모지와 문장 부호를 활용한 이모티콘 사용을 엄격히 금지합니다.
-2. **이식성 최우선 (Model-Agnostic Design):** 타 LLM 인프라(Claude, GPT 등)로 환경을 전환하더라도 즉시 인터프리팅이 가능하도록, 특정 플랫폼 고유의 명령어(클라이언트 전용 문법 등)를 배제한 표준 범용 마크다운 규격을 준수합니다.
-3. **격식 있는 어조 (Professional Tone):** 구인 기업의 테크 리크루터 및 개발 팀장이 코드 아키텍처를 검토할 수 있음을 상시 전제하고, 객관적이고 간결한 엔지니어링 톤앤매너를 유지합니다.
-4. **민감 정보 노출 금지 (Credential & PII Security):** 원격 저장소 보안을 위해 하위 명세서 및 템플릿 생성 시 API Key, 토큰, 패스워드, 또는 개인정보(로컬 디렉토리 경로 내 사용자 계정 이름 등)가 하드코딩되지 않도록 철저히 배제합니다.
+## 4. Repository Management & Pipeline
 
----
+Gemini MUST NOT arbitrarily modify files. All asset management MUST strictly follow this 5-step pipeline:
 
-## 4. 저장소 형상 관리 및 실행 프로세스 (Repository Management & Pipeline)
-
-제미나이는 안티그래비티 및 CLI 환경을 통해 저장소 전체 에셋을 상시 참조하더라도, 임의로 파일을 수정하지 않고 반드시 아래의 4단계 프로세스에 의거하여 작업을 수행해야 합니다.
-
-1. **에셋 분석 및 매핑 (Asset Analysis & Mapping):**
-   - 사용자 요청 시, 기존 `Agents/`, `Skills/`, `Rules/` 디렉토리를 먼저 스캔하여 현재 파일들의 관계도를 파악하고 중복 정의된 로직이나 충돌 가능성이 있는지 진단합니다.
-2. **요구사항 검토 및 통합 설계 (Requirement Review):**
-   - 신규 도입하려는 규칙, 에이전트, 스킬이 전역 규칙 및 최상위 지침(`GEMINI.md`)에 위배되지 않는지 검증하고 정합성을 확인합니다.
-3. **변경 승인 프로세스 (Change Briefing):**
-   - 상호 의존성이 높거나 구조적 리팩토링(파일 분할, 병합 등)이 필요한 모듈을 발견하면, 파일 생성을 진행하기 전 반드시 변경 목적과 핵심 아키텍처를 사용자에게 먼저 브리핑하고 명시적 승인을 얻어야 합니다.
-4. **연계 업데이트 및 컴파일 (Atomic Update):**
-   - 승인이 완료되면 본 문서의 '5. 표준 출력 포맷'에 맞추어 마크다운 자산을 컴파일합니다. 새로운 자산이 추가 및 변경된 경우 `README.md`의 디렉토리 구조 및 관련 인덱스를 즉시 동기화하여 최신 상태를 유지합니다.
-5. **독립성 유지:**
-   - 각 마크다운 파일은 상호 의존성을 최소화하여 필요한 파일만 개별적으로 로드(Load)했을 때도 단독 구동이 가능하도록 분리 설계합니다.
+1. **Asset Analysis:** Scan existing directories (`Agents/`, `Skills/`, `Rules/`, `Docs/`) to map relationships and diagnose potential conflicts.
+2. **Proactive Documentation (Continuous Evolution):** If the user asks about or learns a new AI concept/feature during the session, Gemini SHOULD proactively suggest documenting it in the `Docs/` directory.
+3. **Change Briefing (Plan Before Action):** Before creating or refactoring modules, Gemini MUST brief the user on the purpose and core architecture, and obtain **explicit approval**.
+4. **Atomic Update:** Upon approval, compile the Markdown assets according to the standard format. Keep the `README.md` directory structure synchronized.
+5. **Independence:** Design each Markdown file to minimize interdependencies so it can run autonomously when loaded individually.
 
 ---
 
-## 5. 표준 출력 포맷 (Standard Template)
+## 5. Standard Output Format (Template)
 
-새로운 에이전트 및 스킬 문서를 설계할 때는 반드시 아래의 템플릿 아키텍처를 기반으로 확장하여 저장소의 일관성을 보장합니다.
+When designing new Agents and Skills, Gemini MUST expand upon the following architectural template to guarantee consistency:
 
 ```markdown
-# [명확한 컴포넌트 타이틀]
+# [Clear Component Title]
 
-> [한 줄 요약: 해당 파일의 물리적 런타임 역할 및 대상 정의]
+> [One-line summary: Define the physical runtime role and target of this file]
 
 ---
 
-## 1. 정의 및 역할 (Definition & Role)
-- 세부 책임 및 목적 기술...
+## 1. Definition & Role
+- Detailed description of responsibilities and goals...
 
-## 2. 핵심 실행 프로세스 (Execution Pipeline)
-- 단계별 절차 기술...
+## 2. Execution Pipeline
+- Step-by-step procedural logic...
 
-## 3. 기술적 제약 사항 (Constraints)
-- 금지 행위, 예외 처리 규칙, 아키텍처 한계 명시...
+## 3. Constraints
+- Prohibited actions, exception handling rules, architectural limits...
+```

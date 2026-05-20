@@ -1,37 +1,37 @@
-# Skill Generator 
+# Skill Generator
 
-> 저장소 관리 규격에 부합하는 구조적이고 보안성이 강화된 신규 스킬 명세서(.md)를 자동 생성하는 메타 워크플로우입니다.
+> A meta-workflow that automatically generates structured and security-enhanced new Skill specification files (.md) conforming to the repository governance standards.
 
 ---
 
-## 1. 정의 및 역할 (Definition & Role)
-- 사용자가 요청하는 특정 기술 도메인 또는 자동화 태스크에 대입할 신규 스킬 명세서를 최상위 관리 지침(GEMINI.md) 및 전역 규칙(Rules/global_rules.md)의 규격에 맞게 설계 및 출력합니다.
-- 바닥부터 규칙을 작성해야 하는 개발자의 공수를 최소화하고, AI가 자체적으로 이해하기 가장 최적화된 토큰 효율적 마크다운 아키텍처를 가진 산출물을 균일한 품질로 생산하는 역할을 수행합니다.
+## 1. Definition & Role
+- Designs and outputs a new Skill specification to be applied to a specific technical domain or automation task requested by the user, conforming to the specifications of the top-level management guidelines (`GEMINI.md`) and global rules (`Rules/global_rules.md`).
+- Minimizes the effort of developers who have to write rules from scratch, and serves to consistently produce outputs with a token-efficient markdown architecture optimized for AI comprehension.
 
-## 2. 핵심 실행 프로세스 (Execution Pipeline)
-1. **요구사항 분석 및 추상화:** 사용자가 생성하고자 하는 스킬의 대상(예: 단위 테스트 생성, 코드 리팩토링 등)과 핵심 자동화 목적을 정의합니다.
-2. **컨텍스트 매핑:** 최상위 `GEMINI.md`에서 규정한 행동 제약 조건(이모지 사용 금지, 모델 독립적 설계, 민감 정보 노출 금지 등)과 표준 출력 포맷을 매핑합니다.
-3. **스킬 명세서 컴파일:** 분석된 요구사항과 매핑된 규격을 결합하여 하단의 표준 템플릿 양식에 부합하는 최종 마크다운 파일 내용을 완성형 코드 블록으로 출력합니다.
+## 2. Execution Pipeline
+1. **Requirements Analysis and Abstraction:** Define the target of the skill the user wants to create (e.g., unit test generation, code refactoring) and its core automation objective.
+2. **Context Mapping:** Map the behavioral constraints stipulated in the top-level `GEMINI.md` (prohibition of emojis, model-agnostic design, prohibition of exposing sensitive information, etc.) and the standard output format.
+3. **Compile Skill Specification:** Combine the analyzed requirements and mapped specifications to output the final markdown file content as a complete code block conforming to the standard template below.
 
-### [출력 표준 템플릿 예시]
+### [Standard Output Template Example]
 ```markdown
-# [명확한 컴포넌트 타이틀]
+# [Clear Component Title]
 
-> [한 줄 요약: 해당 파일의 물리적 런타임 역할 및 대상 정의]
+> [One-line summary: Define the physical runtime role and target of this file]
 
 ---
 
-## 1. 정의 및 역할 (Definition & Role)
-- 세부 책임 및 목적 기술...
+## 1. Definition & Role
+- Detailed description of responsibilities and goals...
 
-## 2. 핵심 실행 프로세스 (Execution Pipeline)
-- 단계별 절차 기술...
+## 2. Execution Pipeline
+- Step-by-step procedural logic...
 
-## 3. 기술적 제약 사항 (Constraints)
-- 금지 행위, 예외 처리 규칙, 아키텍처 한계 명시...
+## 3. Constraints
+- Prohibited actions, exception handling rules, architectural limits...
 ```
 
-## 3. 기술적 제약 사항 (Constraints)
-1. **구조적 규격 엄수:** 생성되는 모든 하위 스킬 파일은 반드시 정의 및 역할, 핵심 실행 프로세스, 기술적 제약 사항의 3단 구조를 엄격히 준수해야 하며, 임의로 섹션을 축소하거나 변형할 수 없습니다.
-2. **하드닝 방어 기제 필수 상속:** 새로 생성되는 스킬 내부에는 AI의 고질적 실수를 통제할 수 있는 구체적 제약 조건(임의 생략 금지, 실존 API 검증, 부분 수정 원칙 등)이 해당 태스크의 성격에 맞게 반드시 명시되어야 합니다.
-3. **보안 제약 조건 주입:** 생성될 스킬을 활용하는 과정에서 API Key, 토큰, 자격 증명 또는 사용자 계정이 포함된 로컬 절대 경로 등의 민감 정보가 소스 코드 내에 하드코딩되지 않도록 제어하는 보안 지침을 강제적으로 포함해야 합니다.
+## 3. Constraints
+1. **Strict Adherence to Structural Specifications:** All generated subordinate skill files MUST strictly adhere to the 3-tier structure of Definition & Role, Execution Pipeline, and Constraints, and sections cannot be arbitrarily reduced or altered.
+2. **Mandatory Inheritance of Hardening Defense Mechanisms:** The newly generated skill MUST explicitly include specific constraints (prohibition of arbitrary omissions, verification of real APIs, incremental modification principle, etc.) capable of controlling the AI's chronic mistakes, tailored to the nature of the task.
+3. **Injection of Security Constraints:** It MUST forcefully include security guidelines that prevent sensitive information, such as API Keys, tokens, credentials, or local absolute paths containing user accounts, from being hardcoded within the source code during the utilization of the generated skill.
