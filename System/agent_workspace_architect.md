@@ -20,6 +20,6 @@
 - **Scope Confirmation Required:** NEVER generate a tool file without first briefing the user on the intended Scope (Global vs. Local) and obtaining explicit consent.
 - **Physical Path Mapping (CRITICAL):**
   - **Global Assets:** MUST be saved exactly in `c:\dev\ai_workspace\Agents\` (or `Skills\`, `Rules\`).
-  - **Local Assets:** MUST be saved in a hidden `.ai/` directory at the root of the current project (e.g., `<current_project_root>\.ai\agent_name.md`). If `.ai/` does not exist, create it. NEVER save local assets in the global `ai_workspace`.
+  - **Local Assets:** MUST be saved in the corresponding subdirectory inside the hidden `.ai/` directory of the target project (e.g., `<current_project_root>\.ai\Agents\agent_name.md`, or `\.ai\Skills\`, `\.ai\Rules\`). If the directory structure does not exist, create it. NEVER save local assets in the global `ai_workspace`.
 - **Prevent Redundancy:** Before proposing a new tool, analyze the existing toolset. If an existing agent or skill can adequately handle the task, recommend reusing or slightly modifying it instead of creating a duplicate.
 - **Strict Adherence to Standards:** All generated tools MUST strictly follow the repository governance rules defined in `GEMINI.md` (e.g., English-only for system assets, professional tone, 3-tier standard format).

@@ -24,6 +24,6 @@
 
 ## 3. Constraints
 - **System Isolation:** NEVER copy the `System\` directory. Those are meta-tools strictly reserved for the `ai_workspace` master repository.
-- **Global Rule Exclusion:** Do NOT copy `rule_global.md` or `rule_clean_code.md` as they are natively injected via IDE Customizations.
+- **Global Rule Exclusion:** Do NOT copy `rule_global.md` as it is natively injected via IDE Customizations.
 - **Non-Destructive:** NEVER overwrite existing `.ai` directories in the target project without explicit user confirmation.
 - **Absolute Paths Required:** Always use absolute file paths in shell commands to prevent accidental copying to incorrect relative directories.

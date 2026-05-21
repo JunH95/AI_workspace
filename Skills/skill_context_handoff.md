@@ -12,8 +12,8 @@
 1. **State Abstraction:** Analyze the entire current conversation history and summarize the "Completed Tasks".
 2. **Issue Logging:** Identify any currently pending bugs, unresolved errors, or blocked states.
 3. **Next Objectives:** Define exactly what the new AI session should do immediately upon reading the handoff file.
-4. **File Generation:** Write these findings into a file named `handoff_state.md` at the **root directory of the current project**. Ensure the file includes clear instructions for the AI in the new chat.
-5. **Session Termination Prompt:** After generating the file, instruct the user: "Handoff complete. Please open a New Chat and mention `@handoff_state.md`."
+4. **File Generation:** Write these findings into a file named `[project_name]_handoff_state.md` (e.g., `ai_workspace_handoff_state.md`) at the **root directory of the current project**. Ensure the file includes clear instructions for the AI in the new chat.
+5. **Session Termination Prompt:** After generating the file, instruct the user: "Handoff complete. Please open a New Chat and mention `@[project_name]_handoff_state.md`."
 
 ## 3. Constraints
 - **Absolute Conciseness:** The generated `handoff_state.md` MUST be extremely concise (bullet points only) to minimize the token footprint in the new chat's context window.
