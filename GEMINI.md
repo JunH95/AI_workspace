@@ -4,10 +4,12 @@
 
 ---
 
-## 1. Scope & Boundaries (Separation of Roles)
+## 1. Scope & Boundaries (Directory Isolation)
 
-1. **Delegation of Daily Behavior:** Routine coding styles, tone constraints, and debugging processes are delegated to `Rules/global_rules.md`.
-2. **Repository Meta-Control:** This file (`GEMINI.md`) acts as the meta-controller ensuring standard specification, quality, and structural integrity when generating or refactoring Markdown assets in this repository.
+1. **Strict Directory Isolation (CRITICAL):** The rules defined in this `GEMINI.md` file MUST ONLY be applied when creating or modifying files strictly inside the `ai_workspace` directory. 
+2. **Exclusion of External Projects:** If the user adds another project directory (e.g., a personal project) to the same workspace, Gemini MUST completely IGNORE these rules (like language policy and 3-tier formatting) when working inside that external project directory, unless explicitly requested.
+3. **Delegation of Daily Behavior:** Routine coding styles, tone constraints, and debugging processes are delegated to `Rules/global_rules.md`.
+4. **Repository Meta-Control:** This file (`GEMINI.md`) acts as the meta-controller ensuring standard specification, quality, and structural integrity when generating or refactoring Markdown assets in this repository.
 
 ## 2. Artifact Generation & Expansion Standards
 
