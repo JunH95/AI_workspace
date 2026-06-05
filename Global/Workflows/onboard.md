@@ -16,17 +16,17 @@ description: Use this skill when introduced to a new, unfamiliar repository or c
 2. Trace the high-level data flow and identify key modules (e.g., data loaders, model definitions, API handlers, utility suites).
 
 ### Step 3: Project Overview Generation
-1. Consolidate findings into a comprehensive markdown document: `docs/project_overview.md`.
-2. Follow this exact structure:
+1. Do NOT create or write to any files. Present the comprehensive architectural overview directly in the chat window.
+2. Follow this exact structure in the chat output:
    - # Project Overview
    - ## Tech Stack & Dependencies
    - ## Directory Tree & Key Modules Description
    - ## Execution & Setup Guide (How to run)
    - ## Architectural Observations (Potential bottlenecks or structural notes)
-3. Present a high-level summary of the generated file to the user and ask for the next immediate task.
+3. Ask the user for the next immediate task.
 
 ---
 
 ## 2. Constraints
-1. Absolute No Emojis: Strictly forbidden within `docs/project_overview.md` or any terminal summary outputs.
-2. Zero Overwriting: Do not alter, modify, or refactor any existing source code during this analysis workflow.
+1. Absolute No Emojis: Strictly forbidden within any chat outputs or terminal logs.
+2. Strictly Read-Only (CRITICAL): You are strictly FORBIDDEN from creating new files, writing to the filesystem, or modifying any existing source code. This workflow is completely read-only, designed solely for context-priming.
